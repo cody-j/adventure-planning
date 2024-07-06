@@ -7,12 +7,15 @@ setup(
     include_package_data=True,
     install_requires=[
         'prompt_toolkit',
+        'peewee',
     ],
     entry_points='''
         [console_scripts]
-        ap=adventure_planning.entry_points:cli
+        ap=ap.entry_points:cli
     ''',
+    cmdclass={
+    },
     package_data={
-        '': ['ap.db'],
+        '': ['database/data/ap.db'],
     },
 )
