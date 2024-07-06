@@ -15,7 +15,6 @@ set out
 mid journey
 way home
 settle in
-gratitude
 The Routine specifies a sequence, not necessarily an order. For example, if you like to sleep in, and wake up right before work, you’re a wake-up-and-set-out person and should just do your planning and prepping the night before. You’re also welcome to feel gratitude first thing in the morning; or whenever you like, really. But the sequence should stay the same. Plan before you Set Out.
 Each Step in The Routine may or may not take some input and produce some output. The input to Planning is a list of Vectors, and its output is The Plan. Prepping takes The Plan as input, but produces no output. Prepping is about shifting mindset. Or at least being thoughtful about it.
 Set Out, Mid Journey, and Way Home is a three-part loop to be repeated throughout the day as many times as necessary. The point here is that we start from somewhere known, adventure out, and then make sure we record/document/do science on whatever it is we learned during the adventure, thus building out home base into something larger and more data dense. Settling in is the end of adventure stuff. Charging laptops, tidying up, don’t sprint until bedtime. Let the body digest the world. It can’t do any deep learning without time to think.
