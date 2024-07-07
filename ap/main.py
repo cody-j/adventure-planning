@@ -1,9 +1,10 @@
+from datetime import date
 from prompt_toolkit import Application, HTML
 from prompt_toolkit.layout.layout import Layout
 from prompt_toolkit.layout import Float
 from prompt_toolkit.widgets import Box, Label, Frame, MenuContainer, Checkbox, RadioList
 from prompt_toolkit.layout.containers import Window
-from prompt_toolkit.layout import HSplit
+from prompt_toolkit.layout import HSplit, VSplit
 from prompt_toolkit.layout.dimension import Dimension as D
 from prompt_toolkit.key_binding import KeyBindings
 from prompt_toolkit.application.current import get_app
@@ -31,10 +32,16 @@ class AdventurePlanning:
 
     
     def __init__(self):
+        # what day is it today
+        self.date = date.today().strftime("%B %d, %Y")
+
+
+
+
         self.selections = [ Label(text=str(x)) for x in self.steps ]
         self.selected_item = 0
-        self.selections[self.selected_item].text = HTML(f'<bold>{self.steps[self.selected_item]}</bold>')
-        self.label = Label(text=HTML(f'<bold>{self.selected_item}</bold>'))
+        self.selections[self.selected_item].text = HTML(f'<b>{self.steps[self.selected_item]}</b>')
+        self.label = Label(text=HTML(f'<bold>{self.date}</bold>'))
         self.app = self._create_app()
 
         self.app.run()
@@ -48,18 +55,25 @@ class AdventurePlanning:
             p = self.selected_item
             n = self.selected_item = self.selected_item + 1 if self.selected_item + 1 < len(self.steps) else 0
             self.selections[p].text = self.steps[p]
-            self.selections[n].text = HTML(f'<bold>{self.steps[n]}</bold>')
+            self.selections[n].text = HTML(f'<b>{self.steps[n]}</b>')
         
         @bindings.add('k')
         def _(event):
             p = self.selected_item
             n = self.selected_item = self.selected_item - 1 if self.selected_item - 1 >= 0 else len(self.steps) - 1
             self.selections[p].text = self.steps[p]
-            self.selections[n].text = HTML(f'<bold>{self.steps[n]}</bold>')
+            self.selections[n].text = HTML(f'<b>{self.steps[n]}</b>')
 
+        @bindings.add('enter')
+        def _(event):
+            get_app().exit(result=self.selections[self.selected_item])
 
-
-        frame = Frame(body=HSplit(self.selections))
+        topbar = VSplit([
+            Label(text="Adventure Picker"),
+            Window(width=1, char="|", style="class:line"),
+            self.label
+        ], padding=D(preferred=2))
+        frame = Frame(body=HSplit([ topbar, Window(height=1, char="-", style="class:line") ] + self.selections))
         root_ctr = HSplit([
            frame
         ])
@@ -67,7 +81,7 @@ class AdventurePlanning:
         # root_ctr = MenuContainer(body=root_ctr, menu_items=)
         
         app = Application(
-            full_screen=False,
+            full_screen=True,
             layout=Layout(container=root_ctr),
             mouse_support=False,
             style=None,
