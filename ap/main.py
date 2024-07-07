@@ -57,7 +57,9 @@ class AdventurePlanning:
             self.selections[p].text = self.steps[p]
             self.selections[n].text = HTML(f'<bold>{self.steps[n]}</bold>')
 
-
+        @bindings.add('enter')
+        def _(event):
+            get_app().exit(result=self.selections[self.selected_item])
 
         frame = Frame(body=HSplit(self.selections))
         root_ctr = HSplit([
