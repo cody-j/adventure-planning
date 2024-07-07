@@ -81,7 +81,7 @@ class AdventurePlanning:
         # root_ctr = MenuContainer(body=root_ctr, menu_items=)
         
         app = Application(
-            full_screen=False,
+            full_screen=True,
             layout=Layout(container=root_ctr),
             mouse_support=False,
             style=None,
